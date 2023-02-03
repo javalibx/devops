@@ -7,8 +7,7 @@ services:
     build: 
       context: ./laravel
     volumes:
-      - /mnt/d/Works/sktd/mpm-service:/var/www/mpm-service
-      - /data/sharedisk/sktd:/data/sharedisk/sktd
+      - /var/php/mpm-service:/var/www/mpm-service
     ports:
       - "9001-9009:9001-9009"
     networks:
@@ -22,9 +21,8 @@ services:
     build: 
       context: ./yii
     volumes:
-      - /mnt/d/Works/sktd/hr-service:/var/www/hr-service
-      - /mnt/d/Works/sktd/operation-service:/var/www/operation-service
-      - /data/sharedisk/sktd:/data/sharedisk/sktd
+      - /var/php/hr-service:/var/www/hr-service
+      - /var/php/operation-service:/var/www/operation-service
     ports:
       - "9010-9019:9010-9019"
     networks:
