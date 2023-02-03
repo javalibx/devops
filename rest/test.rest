@@ -1,0 +1,7 @@
+### 需要安装 REST Client 插件
+###
+GET http://www.baidu.com HTTP/1.1
+
+
+## -n 发起的请求数，-c 并发数
+ab -n 1000 -c 100 -p "search.txt" -T "application/json" -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VyLVR5cGUiOjEsImV4cCI6MTY3NjAyMTQzMSwiaWF0IjoxNjczNDI5NDMxLCJVc2VyLUlkIjo4MTYzNTh9.FY7b43Xmp4AmyQPgEl8RHl8RPdCVXopOXnVO2BwM0dg" "https://api.yimaitongdao.com/ymtd-user/hr/searchResume"

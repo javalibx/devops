@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  canal-server:
+    container_name: canal-server
+    image: canal/canal-server
+    volumes:
+      - ./canal/canal.properties:/home/admin/canal-server/conf/example/canal.properties
+    networks:
+      - internal
+      - external
+    restart: always
+
+  canal-admin:
+    container_name: canal-admin
+    image: canal/canal-admin
+    ports:
+      - "5289:8089"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

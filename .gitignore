@@ -1,0 +1,17 @@
+.idea
+/logs
+/data
+.env
+
+.DS_Store
+/docker
+/atlassian/confluence/jar
+/atlassian/jira/jar
+/nacos/target
+/nacos142/target
+/skywalking/archive
+/yapi/releases
+/hw
+/v2ray
+/yii
+/laravel/redis-5.3.7.tgz

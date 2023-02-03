@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  # 注册&配置中心
+  nacos:
+    container_name: nacos
+    image: kabunx/nacos:2.1.0
+    build:
+      context: ./nacos
+    volumes:
+      - /data/volumes/nacos/logs:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  nacos142:
+    container_name: nacos142
+    image: kabunx/nacos:1.4.2
+    build:
+      context: ./nacos142
+    volumes:
+      - /data/volumes/nacos142/logs:/home/nacos/logs
+    ports:
+      - "8849:8848"
+      - "9849:9848"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

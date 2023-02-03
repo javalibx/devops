@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins 
+    image: jenkins/jenkins:alpine
+    env_file:
+      - ./env/jenkins.env
+    volumes:
+      - /data/volumes/jenkins:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      - internal
+      - external
+    restart: always 
+
+networks:
+  internal:
+  external:

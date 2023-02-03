@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  # 数据库服务
+  mongo:
+    container_name: mongo
+    image: mongo:4.4
+    env_file:
+      - ./env/mongo.env
+    volumes:
+      - ${MONGO_DATA_DIR:-/data/volumes/mongo}:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - internal
+    restart: always
+
+
+  yapi:
+    container_name: yapi
+    image: kabunx/yapi
+    build:
+      context: ./yapi
+    volumes:
+      - ./yapi/config.json:/yapi/config.json
+    depends_on:
+      - mongo
+    ports:
+      - "3001:3000"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

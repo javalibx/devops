@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    rabbitmq:
+      container_name: rabbitmq
+      image: rabbitmq:management-alpine
+      env_file:
+        - ./env/rabbitmq.env
+      volumes:
+        - /data/volumes/rabbitmq:/var/lib/rabbitmq
+      ports:
+        - "15672:15672"
+      networks:
+        - internal
+        - external
+      restart: always
+
+networks:
+  internal:
+  external:

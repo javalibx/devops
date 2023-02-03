@@ -1,0 +1,12 @@
+{
+  "expectCity": [
+    3832,
+    3833
+  ],
+  "searchCityName": "北京",
+  "isHistorySearch": 0,
+  "ageMin": 3,
+  "ageMax": 18,
+  "page": 1,
+  "pageSize": 20
+}

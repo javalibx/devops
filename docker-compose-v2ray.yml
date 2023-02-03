@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  # 代理
+  v2ray:
+    container_name: v2ray
+    image: kabunx/v2ray
+    build:
+      context: ./v2ray
+    ports:
+      - "1080:1080"
+    networks:
+      - external
+    restart: always
+
+networks:
+  external:

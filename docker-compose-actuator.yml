@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.41.0
+    volumes:
+      - ./actuator/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "5290:9090"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:9.3.2
+    volumes:
+      - /data/volumes/grafana:/var/lib/grafana
+    ports:
+      - "5230:3000"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

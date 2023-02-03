@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  # gitea
+  gitea:
+    container_name: gitea
+    image: gitea/gitea:1.16
+    env_file:
+      - ./env/gitea.env
+    volumes:
+      - /data/volumes/gitea:/data
+      - /home/zz/.ssh:/data/git/.ssh
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

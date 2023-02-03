@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  openresty:
+    container_name: openresty
+    image: kabunx/openresty:alpine
+    build:
+      context: openresty
+    volumes:
+      - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./openresty/nginx.vh.default.conf:/usr/local/openresty/nginx/conf/conf.d/default.conf
+      - ./openresty/nginx/includes:/usr/local/openresty/nginx/conf/includes
+      - ./openresty/nginx/ssl:/usr/local/openresty/nginx/conf/ssl
+      - ./openresty/nginx/dev/kabunx.conf:/usr/local/openresty/nginx/conf/vhost/kabunx.conf
+      - ./openresty/nginx/dev/kabunx.lua:/usr/local/openresty/nginx/conf/vhost/kabunx.lua
+      - ./openresty/nginx/dev/jira.conf:/usr/local/openresty/nginx/conf/vhost/jira.conf
+      - ./openresty/nginx/dev/confluence.conf:/usr/local/openresty/nginx/conf/vhost/confluence.conf
+      # - ./openresty/nginx/dev/gitea.conf:/usr/local/openresty/nginx/conf/vhost/gitea.conf
+      # - ./openresty/nginx/dev/drone.conf:/usr/local/openresty/nginx/conf/vhost/drone.conf
+      # - ./openresty/nginx/dev/laravel.conf:/usr/local/openresty/nginx/conf/vhost/laravel.conf
+      # - ./openresty/nginx/dev/limit.conf:/usr/local/openresty/nginx/conf/vhost/limit.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

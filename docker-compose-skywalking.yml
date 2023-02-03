@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  skywalking-oap:
+    container_name: skywalking-oap
+    image: kabunx/skywalking-oap:8-jre-slim
+    build:
+      context: ./skywalking/oap
+    env_file:
+      - ./env/skywalking-oap.env
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  skywalking-ui:
+    container_name: skywalking-ui
+    image: kabunx/skywalking-ui:8-jre-slim
+    build:
+      context: ./skywalking/ui
+    env_file:
+      - ./env/skywalking-ui.env
+    depends_on:
+      - skywalking-oap
+    ports:
+      - "8081:8080"
+    networks:
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  jira:
+    container_name: jira
+    image: kabunx/jira:8.20
+    build:
+      context: ./atlassian/jira
+    env_file:
+      - ./env/jira.env
+    volumes:
+      - /data/volumes/atlassian/jira:/var/atlassian/application-data/jira
+    ports:
+      - "8080:8080"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  confluence:
+    container_name: confluence
+    image: kabunx/confluence:7.11
+    build:
+      context: ./atlassian/confluence
+    env_file:
+      - ./env/confluence.env
+    volumes:
+      - /data/volumes/atlassian/confluence:/var/atlassian/application-data/confluence
+    ports:
+      - "8090:8090"
+      - "8091:8091"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

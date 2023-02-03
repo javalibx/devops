@@ -1,0 +1,2 @@
+# 启动调度器
+# * * * * * test -e /var/www/laravel/artisan && php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1

@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  # drone
+  drone-server:
+    container_name: drone-server
+    image: drone/drone:2.12
+    env_file:
+      - ./env/drone.env
+    build: 
+      context: ./devops/drone
+    volumes:
+      - /data/volumes/drone:/var/lib/drone
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "gitea.kabunx.dev:192.168.2.232"
+      # - "gitea.kabunx.dev:192.168.160.129"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  drone-runner:
+    container_name: drone-runner
+    image: drone/drone-runner-docker:1.8
+    env_file:
+      - ./env/drone-runner.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - drone-server
+    networks:
+      - internal
+    restart: always   
+
+networks:
+  internal:
+  external:

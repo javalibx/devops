@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  # 搜索引擎ES
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.6.2
+    env_file:
+      - ./env/elasticsearch.env
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - node.name=kabunx-es
+    volumes:
+      - /data/volumes/elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - internal
+    restart: always
+
+  kibana:
+    container_name: kibana
+    image: kibana:7.6.2
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

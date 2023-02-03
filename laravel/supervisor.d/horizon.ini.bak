@@ -1,0 +1,11 @@
+[program:horizon]
+process_name=%(program_name)s
+command=php /var/www/laravel/artisan horizon
+startsecs=0
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+stopwaitsecs=36000

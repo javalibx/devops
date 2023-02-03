@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  laravel:
+    container_name: laravel
+    image: kabunx/laravel:alpine
+    build: 
+      context: ./laravel
+    volumes:
+      - /mnt/d/Works/sktd/mpm-service:/var/www/mpm-service
+      - /data/sharedisk/sktd:/data/sharedisk/sktd
+    ports:
+      - "9001-9009:9001-9009"
+    networks:
+      - internal
+      - external
+    restart: always
+
+  yii:
+    container_name: yii
+    image: kabunx/yii:alpine
+    build: 
+      context: ./yii
+    volumes:
+      - /mnt/d/Works/sktd/hr-service:/var/www/hr-service
+      - /mnt/d/Works/sktd/operation-service:/var/www/operation-service
+      - /data/sharedisk/sktd:/data/sharedisk/sktd
+    ports:
+      - "9010-9019:9010-9019"
+    networks:
+      - internal
+      - external
+    restart: always
+
+networks:
+  internal:
+  external:

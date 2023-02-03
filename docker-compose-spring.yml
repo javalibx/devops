@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  gateway-server:
+    container_name: gateway-server
+    image: kabunx/gateway-server
+    build:
+      context: java/jre
+    environment:
+      - MODE=${MODE:-test}
+      - SERVER_NAME=${SERVER_NAME}
+      - LOCAL_IP=${LOCAL_IP}
+    restart: always
+    volumes:
+      - ./java/jre/config/logback.xml:/var/spring/config/logback.xml
+      - /var/spring/gateway-server.jar:/var/spring/gateway-server.jar
+      - /var/log/gateway-server:/var/log/gateway-server
+      - /data/sharedisk:/data/sharedisk
+    ports:
+      - "6001:6001"
+      - "16001:16001"
+    networks:
+      - public
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+        reservations:
+          cpus: "1"
+          memory: 3G
+
+networks:
+  public:

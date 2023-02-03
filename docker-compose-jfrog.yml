@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # 私有制品库
+  artifactory-oss:
+    container_name: artifactory-oss
+    image: docker.bintray.io/jfrog/artifactory-oss
+    env_file:
+      - ./env/artifactory-oss.env
+    volumes:
+      - /data/volumes/artifactory/oss:/var/opt/jfrog/artifactory
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+    networks:
+      - internal
+    restart: always
+
+networks:
+  internal:
+  external:
